@@ -1,3 +1,13 @@
+/*
+  This is the main script file of the project.
+  (1)Read the output string from arduino
+  (2)Parse and process the string, get position information, put them into floats
+  (3)Use raycast to generate a laser to detect the gameobject in front of the handle
+  (4)The handle's position corresponds to the arduino readings
+  (5)When raycast detected gameobjects, the gameobject can be grabbed by pitching the handle on the robotic arm.
+     When the pitch readings greater than a specific value, set the gameobject's position to the same as the handle with an offset
+  (6)If the gameobject's state is grabbed, send serial output to the arduino, let it generate force
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,7 +36,7 @@ public class Grab : MonoBehaviour
     private Vector3 offset;
     // Use this for initialization
     void Start()
-    {//******************* serial read
+    {//serial read
         sp1.Open();
         sp1.ReadTimeout = 1;
         sp.Open();
